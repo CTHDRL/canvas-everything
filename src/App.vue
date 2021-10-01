@@ -27,6 +27,7 @@
             institisset, Quid est?
         </p>
 
+        <h2 class="color-title" v-canvas>Color Title</h2>
         <p>
             <strong>Lorem ipsum dolor sit amet,</strong> consectetur adipiscing
             elit. Ea, quae dialectici nunc tradunt et docent, nonne ab illis
@@ -53,6 +54,20 @@
     }
     p {
         max-width: 400px;
+    }
+
+    .color-title {
+        color: #f5f7e3;
+        background: #1d748e;
+        cursor: pointer;
+        display: inline;
+        transition: all 300ms ease;
+
+        &:hover {
+            color: #909280;
+            background: #155568;
+            font-size: 2em;
+        }
     }
 }
 </style>

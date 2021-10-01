@@ -146,10 +146,23 @@ const canvasTextUpdate = (item: CanvasEverything.Node) => {
     ctx.font = `${style.fontWeight} ${fontSizeFloat * dpr.value}px ${
         style.fontFamily
     }`
+    ctx.fillStyle = style.color
 
     // calc position
     const x = rect.left * dpr.value
     const y = rect.top * dpr.value
+    const { width, fontBoundingBoxDescent: height } = ctx.measureText(
+        element.innerText
+    ) as any as { width: number; fontBoundingBoxDescent: number }
+
+    // draw background
+    if (style.backgroundColor) {
+        ctx.save()
+        ctx.globalCompositeOperation = 'destination-over'
+        ctx.fillStyle = style.backgroundColor
+        ctx.fillRect(x, y, width, height)
+        ctx.restore()
+    }
 
     // draw text
     if (updateOverride) {
@@ -168,7 +181,5 @@ const canvasTextUpdate = (item: CanvasEverything.Node) => {
 }
 const defaultTextUpdate = (text: string, x: number, y: number) => {
     ctx.fillText(text, x, y)
-    // ctx.fillStyle = 'blue'
-    // ctx.fillRect(x, y, 50, 50)
 }
 </script>
