@@ -1,5 +1,6 @@
 import { createApp, Plugin } from 'vue'
 import { CanvasEverything } from './types'
+import { setupDom } from './core'
 
 // import components
 import MainCanvas from './components/MainCanvas.vue'
@@ -8,6 +9,9 @@ import { directive } from './directive'
 
 export const canvasEverythingPlugin: Plugin = {
     install(app, options: CanvasEverything.PluginOptions = {}) {
+        // setup dom
+        setupDom()
+
         // register components
         app.component('MainCanvas', MainCanvas)
         // register directives
@@ -15,7 +19,7 @@ export const canvasEverythingPlugin: Plugin = {
 
         // add canvas
         if (options.canvas) {
-            // TODO: allow passing custom canvas
+            // TODO: allow passing custom canvas?
         } else if (!options.preventCanvasAutoCreate) {
             // create and mount MainCanvas
             let container = typeof options.mountPoint === 'string'
@@ -33,5 +37,6 @@ export const canvasEverythingPlugin: Plugin = {
         } else {
             // in this case, user is responsible for creating MainCanvas
         }
+
     }
 }

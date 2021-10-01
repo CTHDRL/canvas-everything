@@ -1,6 +1,9 @@
 import { CanvasEverything } from "../types"
 
+export * from './dom'
+
 export let canvasNodes: Array<CanvasEverything.Node> = []
+export const canvasEverythingUuidAttribute = 'data-canvas-everything-uuid'
 
 export const refreshCanvasEverything = () => {
     canvasNodes = canvasNodes

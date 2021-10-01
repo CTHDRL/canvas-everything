@@ -127,6 +127,9 @@ const update = () => {
 }
 
 const canvasTextUpdate = (item: CanvasEverything.Node) => {
+    // ignore if offscreen
+    if (!item.isIntersecting) return
+
     const { element, rect, style, updateOverride } = item
     // update font style
     ctx.textBaseline = 'top'
@@ -169,5 +172,6 @@ const defaultTextUpdate = (text: string, x: number, y: number) => {
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: -1;
 }
 </style>

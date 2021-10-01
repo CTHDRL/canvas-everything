@@ -1,9 +1,12 @@
 import { ObjectDirective } from 'vue'
 import { v4 as createUuid } from 'uuid'
-import { addOrUpdateCanvasEverythingNode, removeCanvasEverythingNode, setHovered } from '../core'
+import {
+    addOrUpdateCanvasEverythingNode,
+    canvasEverythingUuidAttribute,
+    intersectionObserver,
+    removeCanvasEverythingNode,
+} from '../core'
 import { CanvasEverything } from '../types'
-
-const canvasEverythingUuidAttribute = 'data-canvas-everything-uuid'
 
 export const directive: ObjectDirective = {
     mounted(el: HTMLElement, binding) {
@@ -13,11 +16,12 @@ export const directive: ObjectDirective = {
         const uuid = options.uuid ?? createUuid()
         el.setAttribute(canvasEverythingUuidAttribute, uuid)
 
-        // create canvas dom
+        // create node
         addOrUpdateCanvasEverythingNode({
             element: el,
             focus: false,
             hover: false,
+            isIntersecting: false,
             meta: binding.value?.meta,
             rect: el.getBoundingClientRect(),
             style: window.getComputedStyle(el),
@@ -30,11 +34,15 @@ export const directive: ObjectDirective = {
 
         // hide original el
         el.style.opacity = '0'
+
+        // observe el
+        intersectionObserver.observe(el)
     },
     unmounted(el: HTMLElement) {
         const uuid = el.getAttribute(canvasEverythingUuidAttribute)
         if (uuid) {
             removeCanvasEverythingNode(uuid)
+            intersectionObserver.unobserve(el)
         }
     }
 }

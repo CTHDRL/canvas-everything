@@ -3,6 +3,7 @@ export declare namespace CanvasEverything {
         element: HTMLElement
         focus: boolean
         hover: boolean
+        isIntersecting: boolean
         meta: { [key: string]: any }
         rect: DOMRect
         style: CSSStyleDeclaration

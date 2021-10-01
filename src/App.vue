@@ -48,6 +48,11 @@
 
 <style lang="scss">
 .canvas-everything-demo {
+    font-family: sans-serif;
+
+    h2 {
+        font-weight: 400;
+    }
     p {
         max-width: 400px;
     }
