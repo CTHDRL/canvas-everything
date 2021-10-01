@@ -1,6 +1,6 @@
 {
   "name": "canvas-everything",
-  "version": "0.1.03",
+  "version": "0.1.04",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -20,8 +20,8 @@
     "vue-tsc": "^0.3.0"
   },
   "description": "",
-  "main": "./dist/canvas-everything.js",
-  "module": "./dist/canvas-everything.module.js",
+  "main": "./dist/canvas-everything.umd.js",
+  "module": "./dist/canvas-everything.es.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CTHDRL/canvas-everything.git"
