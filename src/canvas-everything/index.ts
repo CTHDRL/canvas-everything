@@ -7,7 +7,7 @@ import MainCanvas from './components/MainCanvas.vue'
 // import directives
 import { directive } from './directive'
 
-export const canvasEverythingPlugin: Plugin = {
+export const canvasEverything: Plugin = {
     install(app, options: CanvasEverything.PluginOptions = {}) {
         // setup dom
         setupDom()
