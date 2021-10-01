@@ -8,7 +8,7 @@ declare namespace CanvasEverything {
         style: CSSStyleDeclaration
         type: Type
         updateOverride?: UpdateOverride
-        uuid: string
+        uuid: Uuid
         z: number
     }
 
@@ -20,11 +20,19 @@ declare namespace CanvasEverything {
         defaultUpdate: UpdateFunction
     }
 
+    interface PluginOptions {
+        canvas?: string | HTMLCanvasElement
+        mountPoint?: string | HTMLElement
+        preventCanvasAutoCreate?: boolean
+    }
+
+    type Type = 'CanvasEverything'
+
     type UpdateOverride =
         (opts: OverrideOptions, x: number, y: number) => void
 
     type UpdateFunction =
         (item: Node, x: number, y: number) => void
 
-    type Type = 'CanvasEverything'
+    type Uuid = string
 }
