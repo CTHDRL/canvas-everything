@@ -3,11 +3,17 @@ import { CanvasEverything } from './types'
 
 // import components
 import MainCanvas from './components/MainCanvas.vue'
+// import directives
+import { directive } from './directive'
 
 export const canvasEverythingPlugin: Plugin = {
     install(app, options: CanvasEverything.PluginOptions = {}) {
+        // register components
         app.component('MainCanvas', MainCanvas)
+        // register directives
+        app.directive('canvas', directive)
 
+        // add canvas
         if (options.canvas) {
             // TODO: allow passing custom canvas
         } else if (!options.preventCanvasAutoCreate) {

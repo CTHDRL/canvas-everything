@@ -50,9 +50,6 @@ onMounted(() => {
     // size canvas
     resizeCanvas()
 
-    // TODO: necessary?
-    // requestAnimationFrame(resizeCanvas)
-
     // kick main update loop
     update()
 })
