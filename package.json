@@ -1,10 +1,11 @@
 {
   "name": "canvas-everything",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "uuid": "8.3.2",
@@ -17,5 +18,19 @@
     "typescript": "^4.4.3",
     "vite": "^2.6.0",
     "vue-tsc": "^0.3.0"
-  }
+  },
+  "description": "",
+  "main": "./dist/trois-renderer.js",
+  "module": "./dist/trois-renderer.module.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CTHDRL/canvas-everything.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CTHDRL/canvas-everything/issues"
+  },
+  "homepage": "https://github.com/CTHDRL/canvas-everything#readme"
 }
