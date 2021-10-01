@@ -1,5 +1,10 @@
 <template>
-    <canvas ref="canvas" />
+    <canvas
+        class="canvas-everything-main-canvas"
+        :width="canvasDimensions.x"
+        :height="canvasDimensions.y"
+        ref="canvas"
+    />
 </template>
 
 <script lang="ts" setup>
@@ -157,3 +162,15 @@ const defaultTextUpdate = (text: string, x: number, y: number) => {
     ctx.fillText(text, x, y)
 }
 </script>
+
+<style lang="scss">
+.canvas-everything-main-canvas {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
