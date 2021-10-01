@@ -10,10 +10,9 @@
             :key="i"
             :data-canvas-everything-uuid="`${uuid}.${i}`"
             :ref="setWordRef"
-        >
-            {{ word }}
-        </span>
-    </span>
+            >{{ word + (i === splitText.length - 1 ? '' : ' ') }}</span
+        ></span
+    >
 </template>
 
 <script lang="ts" setup>

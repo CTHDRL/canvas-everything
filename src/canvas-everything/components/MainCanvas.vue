@@ -7,8 +7,6 @@
         :style="{
             position: 'fixed',
             top: 0,
-            right: 0,
-            bottom: 0,
             left: 0,
             width: '100%',
             height: '100%',
@@ -170,5 +168,7 @@ const canvasTextUpdate = (item: CanvasEverything.Node) => {
 }
 const defaultTextUpdate = (text: string, x: number, y: number) => {
     ctx.fillText(text, x, y)
+    // ctx.fillStyle = 'blue'
+    // ctx.fillRect(x, y, 50, 50)
 }
 </script>

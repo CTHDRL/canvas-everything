@@ -35,8 +35,6 @@ export const directive: ObjectDirective = {
         // hide original el
         el.style.opacity = '0'
 
-        // observe el
-        intersectionObserver.observe(el)
     },
     unmounted(el: HTMLElement) {
         const uuid = el.getAttribute(canvasEverythingUuidAttribute)
