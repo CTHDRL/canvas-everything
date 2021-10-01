@@ -4,6 +4,7 @@ import { setupDom } from './core'
 
 // import components
 import MainCanvas from './components/MainCanvas.vue'
+import CanvasText from './components/CanvasText.vue'
 // import directives
 import { directive } from './directive'
 
@@ -14,6 +15,7 @@ export const canvasEverything: Plugin = {
 
         // register components
         app.component('MainCanvas', MainCanvas)
+        app.component('CanvasText', CanvasText)
         // register directives
         app.directive('canvas', directive)
 
