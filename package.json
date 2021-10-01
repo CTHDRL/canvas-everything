@@ -1,6 +1,6 @@
 {
   "name": "canvas-everything",
-  "version": "0.1.01",
+  "version": "0.1.02",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -32,5 +32,11 @@
   "bugs": {
     "url": "https://github.com/CTHDRL/canvas-everything/issues"
   },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "src"
+  ],
   "homepage": "https://github.com/CTHDRL/canvas-everything#readme"
 }
