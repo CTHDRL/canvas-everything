@@ -1,3 +1,5 @@
+import { CanvasEverything } from "../types"
+
 export let canvasNodes: Array<CanvasEverything.Node> = []
 
 export const refreshCanvasEverything = () => {
@@ -39,6 +41,6 @@ export const setHovered = (uuid: string, hovered: boolean, focus?: boolean) => {
     }
 }
 
-export const isCanvasText = (target: any): target is CanvasEverything.Node => {
+export const isCanvasEverythingNode = (target: any): target is CanvasEverything.Node => {
     return target?.uuid && ['CanvasEverything'].includes(target?.type)
 }
