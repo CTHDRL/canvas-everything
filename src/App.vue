@@ -69,7 +69,7 @@
         &:hover {
             color: #909280;
             background: #155568;
-            font-size: 2em;
+            /* font-size: 2em; */
         }
     }
 }

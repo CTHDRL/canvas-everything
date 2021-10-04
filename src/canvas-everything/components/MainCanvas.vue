@@ -151,9 +151,9 @@ const canvasTextUpdate = (item: CanvasEverything.Node) => {
     // calc position
     const x = rect.left * dpr.value
     const y = rect.top * dpr.value
-    const { width, fontBoundingBoxDescent: height } = ctx.measureText(
-        element.innerText
-    ) as any as { width: number; fontBoundingBoxDescent: number }
+    const width = rect.width * dpr.value
+    const height = rect.height * dpr.value
+    const { paddingLeft, paddingTop, paddingRight, paddingBottom } = style
 
     // draw background
     if (style.backgroundColor) {
