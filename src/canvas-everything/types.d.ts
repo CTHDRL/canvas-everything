@@ -3,6 +3,7 @@ declare namespace CanvasEverything {
         element: HTMLElement
         focus: boolean
         hover: boolean
+        image?: ImageData
         isIntersecting: boolean
         meta: { [key: string]: any }
         rect: DOMRect

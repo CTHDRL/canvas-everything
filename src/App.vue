@@ -12,6 +12,9 @@
             igitur, cum de re conveniat, non malumus usitate loqui? Quae cum
             dixisset paulumque institisset, Quid est?
         </p>
+        <div class="image-padding" :style="{ '--aspect': 1 }">
+            <img src="//placekitten.com/250/250" v-canvas />
+        </div>
         <h2><canvas-text text="Another Title" /></h2>
         <p>
             <strong>Lorem ipsum dolor sit amet,</strong> consectetur adipiscing
@@ -57,6 +60,10 @@
     }
     .p1 span {
         background: blue;
+    }
+
+    .image-padding {
+        height: 250px;
     }
 
     .color-title {

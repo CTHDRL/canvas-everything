@@ -1,4 +1,6 @@
 import { intersectionObserver } from "./dom"
+export * from './canvasImageUpdate'
+export * from './canvasTextUpdate'
 
 export * from './dom'
 
