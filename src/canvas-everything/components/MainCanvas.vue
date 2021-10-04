@@ -148,10 +148,23 @@ const canvasTextUpdate = (item: CanvasEverything.Node) => {
     ctx.font = `${style.fontWeight} ${fontSizeFloat * dpr.value}px ${
         style.fontFamily
     }`
+    ctx.fillStyle = style.color
 
     // calc position
     const x = rect.left * dpr.value
     const y = rect.top * dpr.value
+    const width = rect.width * dpr.value
+    const height = rect.height * dpr.value
+    const { paddingLeft, paddingTop, paddingRight, paddingBottom } = style
+
+    // draw background
+    if (style.backgroundColor) {
+        ctx.save()
+        ctx.globalCompositeOperation = 'destination-over'
+        ctx.fillStyle = style.backgroundColor
+        ctx.fillRect(x, y, width, height)
+        ctx.restore()
+    }
 
     // draw text
     if (updateOverride) {
