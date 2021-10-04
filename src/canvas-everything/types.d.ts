@@ -3,6 +3,7 @@ declare namespace CanvasEverything {
         element: HTMLElement
         focus: boolean
         hover: boolean
+        selection: Selection | undefined
         image?: ImageData
         isIntersecting: boolean
         meta: { [key: string]: any }
@@ -35,11 +36,9 @@ declare namespace CanvasEverything {
 
     type Type = 'CanvasEverything'
 
-    type UpdateOverride =
-        (opts: OverrideOptions, x: number, y: number) => void
+    type UpdateOverride = (opts: OverrideOptions, x: number, y: number) => void
 
-    type UpdateFunction =
-        (item: Node, x: number, y: number) => void
+    type UpdateFunction = (item: Node, x: number, y: number) => void
 
     type Uuid = string
 }

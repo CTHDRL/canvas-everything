@@ -11,8 +11,9 @@ export const canvasTextUpdate = (
     ctx.textBaseline = 'top'
     ctx.textAlign = 'left'
     const fontSizeFloat = parseFloat(style.fontSize)
-    ctx.font = `${style.fontWeight} ${fontSizeFloat * dpr}px ${style.fontFamily
-        }`
+    ctx.font = `${style.fontWeight} ${fontSizeFloat * dpr}px ${
+        style.fontFamily
+    }`
     ctx.fillStyle = style.color
 
     // calc position
@@ -32,6 +33,23 @@ export const canvasTextUpdate = (
         ctx.restore()
     }
 
+    // draw selection
+    if (item.selection && item.selection.type === 'Range') {
+        const { anchorOffset, focusOffset } = item.selection
+        const selectedText = element.innerText.slice(anchorOffset, focusOffset)
+        const leadingText = element.innerText.slice(0, anchorOffset)
+        const { width: selectionWidth } = ctx.measureText(selectedText)
+        const { width: leadingWidth } = ctx.measureText(leadingText)
+
+        ctx.save()
+        ctx.globalCompositeOperation = 'source-over'
+        ctx.fillStyle = '#0075ff'
+        ctx.fillRect(x + leadingWidth, y, x + selectionWidth, height)
+        ctx.fillStyle = 'white'
+        ctx.fillText(selectedText, x + leadingWidth, y)
+        ctx.restore()
+    }
+
     // draw text
     if (updateOverride) {
         updateOverride(
@@ -45,7 +63,7 @@ export const canvasTextUpdate = (
                         y,
                         paddingLeft,
                         paddingTop,
-                        ctx,
+                        ctx
                     ),
             },
             x,
