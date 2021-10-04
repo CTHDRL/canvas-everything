@@ -63,13 +63,13 @@
         color: #f5f7e3;
         background: #1d748e;
         cursor: pointer;
-        display: inline;
+        display: inline-block;
         transition: all 300ms ease;
+        padding: 50px 30px;
 
         &:hover {
             color: #909280;
             background: #155568;
-            /* font-size: 2em; */
         }
     }
 }

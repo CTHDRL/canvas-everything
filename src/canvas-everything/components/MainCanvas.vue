@@ -154,7 +154,8 @@ const canvasTextUpdate = (item: CanvasEverything.Node) => {
     const y = rect.top * dpr.value
     const width = rect.width * dpr.value
     const height = rect.height * dpr.value
-    const { paddingLeft, paddingTop, paddingRight, paddingBottom } = style
+    const paddingLeft = parseFloat(style.paddingLeft) * dpr.value
+    const paddingTop = parseFloat(style.paddingTop) * dpr.value
 
     // draw background
     if (style.backgroundColor) {
@@ -171,16 +172,29 @@ const canvasTextUpdate = (item: CanvasEverything.Node) => {
             {
                 ctx,
                 canvasText: item,
-                defaultUpdate: () => defaultTextUpdate(element.innerText, x, y),
+                defaultUpdate: () =>
+                    defaultTextUpdate(
+                        element.innerText,
+                        x,
+                        y,
+                        paddingLeft,
+                        paddingTop
+                    ),
             },
             x,
             y
         )
     } else {
-        defaultTextUpdate(element.innerText, x, y)
+        defaultTextUpdate(element.innerText, x, y, paddingLeft, paddingTop)
     }
 }
-const defaultTextUpdate = (text: string, x: number, y: number) => {
-    ctx.fillText(text, x, y)
+const defaultTextUpdate = (
+    text: string,
+    x: number,
+    y: number,
+    paddingLeft: number,
+    paddingTop: number
+) => {
+    ctx.fillText(text, x + paddingLeft, y + paddingTop)
 }
 </script>
