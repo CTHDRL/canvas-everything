@@ -23,6 +23,10 @@ export const directive: ObjectDirective = {
             isIntersecting: false,
             meta: binding.value?.meta,
             rect: el.getBoundingClientRect(),
+            refresh() {
+                this.rect = this.element.getBoundingClientRect()
+                this.style = window.getComputedStyle(this.element)
+            },
             style: window.getComputedStyle(el),
             type: 'CanvasEverything',
             updateOverride: undefined,

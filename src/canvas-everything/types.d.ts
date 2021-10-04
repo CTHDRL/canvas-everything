@@ -7,11 +7,16 @@ declare namespace CanvasEverything {
         isIntersecting: boolean
         meta: { [key: string]: any }
         rect: DOMRect
+        refresh: () => void
         style: CSSStyleDeclaration
         type: Type
         updateOverride?: UpdateOverride
         uuid: Uuid
         z: number
+    }
+
+    interface ImageNode extends Node {
+        imageLoaded: boolean
     }
 
     type DirectiveOptions = Partial<Node>

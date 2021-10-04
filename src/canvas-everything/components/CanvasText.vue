@@ -69,20 +69,20 @@ onMounted(() => {
 import { addOrUpdateCanvasEverythingNode } from '../core'
 const refresh = () => {
     words.value.forEach((word, i) => {
-        const opts: CanvasEverything.Node = {
-            element: word,
-            focus: false,
-            hover: false,
-            isIntersecting: false,
-            meta: props.meta ?? {},
-            rect: word.getBoundingClientRect(),
-            style: window.getComputedStyle(word),
-            type: 'CanvasEverything',
-            updateOverride: props.updateOverride,
-            uuid: `${uuid.value}.${i}`,
-            z: props.z,
-        }
-        addOrUpdateCanvasEverythingNode(opts)
+        // const opts: CanvasEverything.Node = {
+        //     element: word,
+        //     focus: false,
+        //     hover: false,
+        //     isIntersecting: false,
+        //     meta: props.meta ?? {},
+        //     rect: word.getBoundingClientRect(),
+        //     style: window.getComputedStyle(word),
+        //     type: 'CanvasEverything',
+        //     updateOverride: props.updateOverride,
+        //     uuid: `${uuid.value}.${i}`,
+        //     z: props.z,
+        // }
+        // addOrUpdateCanvasEverythingNode(opts)
     })
 }
 </script>
