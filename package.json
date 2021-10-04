@@ -1,6 +1,6 @@
 {
     "name": "canvas-everything",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
@@ -26,6 +26,7 @@
         "vue-tsc": "^0.3.0"
     },
     "description": "",
+    "types": "./dist/canvas-everything.es.d.ts",
     "main": "./dist/canvas-everything.umd.js",
     "module": "./dist/canvas-everything.es.js",
     "repository": {
