@@ -140,7 +140,11 @@ const update = () => {
                 if (isCanvasEverythingNode(item)) {
                     if (item.element.tagName.toLowerCase() === 'img') {
                         // handle images
-                        canvasImageUpdate(item, ctx, dpr.value)
+                        canvasImageUpdate(
+                            item as CanvasEverything.ImageNode,
+                            ctx,
+                            dpr.value
+                        )
                     } else {
                         // handle text (fallback)
                         canvasTextUpdate(item, ctx, dpr.value)
