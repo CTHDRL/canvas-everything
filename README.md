@@ -1,11 +1,45 @@
-# Vue 3 + Typescript + Vite
+# Canvas Everything
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A Vue 3 directive for drawing the DOM to canvas.
 
-## Recommended IDE Setup
+## Works with...
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+-   [x] All text elements
+-   [x] Images
+-   [ ] Video
+-   [ ] Inputs
+-   [ ] Buttons
 
-## Type Support For `.vue` Imports in TS
+## Install
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+[Vue.js 3.0](https://v3.vuejs.org/) is required for this directive.
+`npm i canvas-everything`
+or
+`yarn add canvas-everything`
+
+## Usage
+
+In your main.js or main.ts file...
+
+```Javascript
+import { canvasEverything } from 'canvas-everything'
+
+const app = createApp(App)
+app.use(canvasEverything)
+```
+
+Then in your Vue component...
+
+```HTML
+<h1 v-canvas> Hello World! </h1>
+```
+
+That's it! Each element using the `v-canvas` directive will be cloned to the main canvas.
+
+### Using Custom Update Functions
+
+`TODO` Documentation for using updateOverride
+
+### Redrawing the canvas
+
+`TODO` Documentation for refreshCanvasEverything
