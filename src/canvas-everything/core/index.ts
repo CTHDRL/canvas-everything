@@ -1,4 +1,4 @@
-import { CanvasEverything } from "../types"
+import { intersectionObserver } from "./dom"
 
 export * from './dom'
 
@@ -26,12 +26,14 @@ export const addOrUpdateCanvasEverythingNode = (opts: CanvasEverything.Node) => 
         canvasNodes.splice(idx, 1, opts)
     } else {
         canvasNodes.push(opts)
+        intersectionObserver.observe(opts.element)
     }
 }
 
 export const removeCanvasEverythingNode = (uuid: string) => {
     const idx = canvasNodes.findIndex((v) => v.uuid.startsWith(uuid))
     if (idx !== -1) {
+        intersectionObserver.unobserve(canvasNodes[idx].element)
         canvasNodes.splice(idx, 1)
     }
 }

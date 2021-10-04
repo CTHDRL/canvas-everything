@@ -6,7 +6,6 @@ import {
     intersectionObserver,
     removeCanvasEverythingNode,
 } from '../core'
-import { CanvasEverything } from '../types'
 
 export const directive: ObjectDirective = {
     mounted(el: HTMLElement, binding) {
@@ -35,8 +34,6 @@ export const directive: ObjectDirective = {
         // hide original el
         el.style.opacity = '0'
 
-        // observe el
-        intersectionObserver.observe(el)
     },
     unmounted(el: HTMLElement) {
         const uuid = el.getAttribute(canvasEverythingUuidAttribute)

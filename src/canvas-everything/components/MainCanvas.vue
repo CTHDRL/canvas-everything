@@ -7,8 +7,6 @@
         :style="{
             position: 'fixed',
             top: 0,
-            right: 0,
-            bottom: 0,
             left: 0,
             width: '100%',
             height: '100%',
@@ -20,7 +18,6 @@
 <script lang="ts" setup>
 import { defineProps, onBeforeUnmount, onMounted, ref, withDefaults } from 'vue'
 import { canvasNodes, isCanvasEverythingNode } from '../core'
-import { CanvasEverything } from '../types'
 
 // Props
 // ====================
@@ -129,7 +126,9 @@ const update = () => {
         toRun.forEach((item) => {
             if (isCanvasEverythingNode(item)) {
                 ctx.save()
-                canvasTextUpdate(item)
+                if (isCanvasEverythingNode(item)) {
+                    canvasTextUpdate(item)
+                }
                 ctx.restore()
             }
         })

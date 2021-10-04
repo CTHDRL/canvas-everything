@@ -1,4 +1,4 @@
-export declare namespace CanvasEverything {
+declare namespace CanvasEverything {
     interface Node {
         element: HTMLElement
         focus: boolean
