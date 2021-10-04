@@ -1,5 +1,4 @@
 import { createApp, Plugin } from 'vue'
-import { CanvasEverything } from './types'
 import { setupDom } from './core'
 
 // import components

@@ -1,4 +1,3 @@
-import { CanvasEverything } from "../types"
 import { intersectionObserver } from "./dom"
 
 export * from './dom'

@@ -16,9 +16,9 @@
 </template>
 
 <script lang="ts" setup>
-import { CanvasEverything } from '../types'
 import { v4 as createUuid } from 'uuid'
 import {
+    Component,
     computed,
     defineProps,
     nextTick,
@@ -49,8 +49,8 @@ const hovered = ref(false)
 const splitText = computed(() => props.text.split(/\s+/))
 // words multiple refs (https://v3.vuejs.org/guide/migration/array-refs.html)
 const words = ref<HTMLElement[]>([])
-const setWordRef = (el: HTMLElement) => {
-    if (el) words.value.push(el)
+const setWordRef = (el: Element | Component | null) => {
+    if (el) words.value.push(el as HTMLElement)
 }
 onBeforeUpdate(() => (words.value = []))
 onUpdated(() => {

@@ -6,7 +6,6 @@ import {
     intersectionObserver,
     removeCanvasEverythingNode,
 } from '../core'
-import { CanvasEverything } from '../types'
 
 export const directive: ObjectDirective = {
     mounted(el: HTMLElement, binding) {
