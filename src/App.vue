@@ -2,7 +2,7 @@
     <main class="canvas-everything-demo">
         <h1>Title</h1>
         <p>
-            <canvas-text class="p1" text="nonne inventa sunt?" /> Quis est, qui
+            <span class="p1" v-canvas>nonne inventa sunt?</span> Quis est, qui
             non oderit libidinosam, protervam adolescentiam? Verum tamen cum de
             rebus grandioribus dicas, ipsae res verba rapiunt; Quibusnam
             praeteritis? Duo Reges: constructio interrete. Cur deinde Metrodori
@@ -12,7 +12,10 @@
             igitur, cum de re conveniat, non malumus usitate loqui? Quae cum
             dixisset paulumque institisset, Quid est?
         </p>
-        <h2><canvas-text text="Another Title" /></h2>
+        <div class="image-padding" :style="{ '--aspect': 1 }">
+            <img src="//placekitten.com/250/250" v-canvas />
+        </div>
+        <h2 v-canvas>Another Title</h2>
         <p>
             <strong>Lorem ipsum dolor sit amet,</strong> consectetur adipiscing
             elit. Ea, quae dialectici nunc tradunt et docent, nonne ab illis
@@ -55,8 +58,12 @@
     p {
         max-width: 400px;
     }
-    .p1 span {
+    .p1 {
         background: blue;
+    }
+
+    .image-padding {
+        height: 250px;
     }
 
     .color-title {

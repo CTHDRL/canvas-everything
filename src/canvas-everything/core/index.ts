@@ -1,4 +1,6 @@
 import { intersectionObserver } from "./dom"
+export * from './canvasImageUpdate'
+export * from './canvasTextUpdate'
 
 export * from './dom'
 
@@ -9,22 +11,20 @@ export const refreshCanvasEverything = () => {
     canvasNodes = canvasNodes
         // remove empties...
         .filter(item => item.element)
-        // ...then update rect & style
-        .map(item => {
-            return {
-                ...item,
-                rect: item.element.getBoundingClientRect(),
-                style: window.getComputedStyle(item.element),
 
-            }
-        })
+    // ...then update rect & style
+    canvasNodes.forEach(item => {
+        item.refresh()
+    })
 }
 
 export const addOrUpdateCanvasEverythingNode = (opts: CanvasEverything.Node) => {
     const idx = canvasNodes.findIndex((v) => v.uuid.startsWith(opts.uuid))
     if (idx !== -1) {
+        // update existing entry
         canvasNodes.splice(idx, 1, opts)
     } else {
+        // add new entry & observe
         canvasNodes.push(opts)
         intersectionObserver.observe(opts.element)
     }

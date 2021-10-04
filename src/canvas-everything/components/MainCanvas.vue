@@ -16,8 +16,16 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, onBeforeUnmount, onMounted, ref, withDefaults } from 'vue'
+import {
+    defineProps,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+    withDefaults,
+    nextTick,
+} from 'vue'
 import { canvasNodes, isCanvasEverythingNode } from '../core'
+import { canvasImageUpdate, canvasTextUpdate } from '../core'
 
 // Props
 // ====================
@@ -40,7 +48,7 @@ const canvasDimensions = ref({ x: 0, y: 0 })
 
 // Canvas setup
 // ====================
-onMounted(() => {
+onMounted(async () => {
     if (!canvas.value || !canvas.value.getContext('2d')) {
         throw new Error('missing canvas')
     }
@@ -55,6 +63,9 @@ onMounted(() => {
     // add listeners
     window.addEventListener('resize', resizeCanvas)
     // size canvas
+    resizeCanvas()
+    // size canvas again after a tick
+    await nextTick()
     resizeCanvas()
 
     // kick main update loop
@@ -127,74 +138,21 @@ const update = () => {
             if (isCanvasEverythingNode(item)) {
                 ctx.save()
                 if (isCanvasEverythingNode(item)) {
-                    canvasTextUpdate(item)
+                    if (item.element.tagName.toLowerCase() === 'img') {
+                        // handle images
+                        canvasImageUpdate(
+                            item as CanvasEverything.ImageNode,
+                            ctx,
+                            dpr.value
+                        )
+                    } else {
+                        // handle text (fallback)
+                        canvasTextUpdate(item, ctx, dpr.value)
+                    }
                 }
                 ctx.restore()
             }
         })
     })
-}
-
-const canvasTextUpdate = (item: CanvasEverything.Node) => {
-    // ignore if offscreen
-    if (!item.isIntersecting) return
-
-    const { element, rect, style, updateOverride } = item
-    // update font style
-    ctx.textBaseline = 'top'
-    ctx.textAlign = 'left'
-    const fontSizeFloat = parseFloat(style.fontSize)
-    ctx.font = `${style.fontWeight} ${fontSizeFloat * dpr.value}px ${
-        style.fontFamily
-    }`
-    ctx.fillStyle = style.color
-
-    // calc position
-    const x = rect.left * dpr.value
-    const y = rect.top * dpr.value
-    const width = rect.width * dpr.value
-    const height = rect.height * dpr.value
-    const paddingLeft = parseFloat(style.paddingLeft) * dpr.value
-    const paddingTop = parseFloat(style.paddingTop) * dpr.value
-
-    // draw background
-    if (style.backgroundColor) {
-        ctx.save()
-        ctx.globalCompositeOperation = 'destination-over'
-        ctx.fillStyle = style.backgroundColor
-        ctx.fillRect(x, y, width, height)
-        ctx.restore()
-    }
-
-    // draw text
-    if (updateOverride) {
-        updateOverride(
-            {
-                ctx,
-                canvasText: item,
-                defaultUpdate: () =>
-                    defaultTextUpdate(
-                        element.innerText,
-                        x,
-                        y,
-                        paddingLeft,
-                        paddingTop
-                    ),
-            },
-            x,
-            y
-        )
-    } else {
-        defaultTextUpdate(element.innerText, x, y, paddingLeft, paddingTop)
-    }
-}
-const defaultTextUpdate = (
-    text: string,
-    x: number,
-    y: number,
-    paddingLeft: number,
-    paddingTop: number
-) => {
-    ctx.fillText(text, x + paddingLeft, y + paddingTop)
 }
 </script>
