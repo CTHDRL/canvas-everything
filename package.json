@@ -1,6 +1,6 @@
 {
     "name": "canvas-everything",
-    "version": "0.1.04",
+    "version": "0.1.05",
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
