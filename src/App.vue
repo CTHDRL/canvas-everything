@@ -12,7 +12,7 @@
             igitur, cum de re conveniat, non malumus usitate loqui? Quae cum
             dixisset paulumque institisset, Quid est?
         </p>
-        <div class="image-padding" :style="{ '--aspect': 1 }">
+        <div class="image-sizer">
             <img src="//placekitten.com/250/250" v-canvas />
         </div>
         <h2 v-canvas>Another Title</h2>
@@ -62,7 +62,7 @@
         background: blue;
     }
 
-    .image-padding {
+    .image-sizer {
         height: 250px;
     }
 
