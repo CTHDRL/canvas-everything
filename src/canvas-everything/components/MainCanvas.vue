@@ -16,7 +16,14 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, onBeforeUnmount, onMounted, ref, withDefaults } from 'vue'
+import {
+    defineProps,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+    withDefaults,
+    nextTick,
+} from 'vue'
 import { canvasNodes, isCanvasEverythingNode } from '../core'
 import { canvasImageUpdate, canvasTextUpdate } from '../core'
 
@@ -41,7 +48,7 @@ const canvasDimensions = ref({ x: 0, y: 0 })
 
 // Canvas setup
 // ====================
-onMounted(() => {
+onMounted(async () => {
     if (!canvas.value || !canvas.value.getContext('2d')) {
         throw new Error('missing canvas')
     }
@@ -56,6 +63,9 @@ onMounted(() => {
     // add listeners
     window.addEventListener('resize', resizeCanvas)
     // size canvas
+    resizeCanvas()
+    // size canvas again after a tick
+    await nextTick()
     resizeCanvas()
 
     // kick main update loop
