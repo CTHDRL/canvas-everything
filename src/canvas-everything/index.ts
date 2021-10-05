@@ -1,9 +1,9 @@
 import { createApp, Plugin } from 'vue'
 import { setupDom } from './core'
+import { canvasNodes, refreshCanvasEverything } from './core'
 
 // import components
 import MainCanvas from './components/MainCanvas.vue'
-// import CanvasText from './components/CanvasText.vue'
 // import directives
 import { directive } from './directive'
 
@@ -14,7 +14,6 @@ export const canvasEverything: Plugin = {
 
         // register components
         app.component('MainCanvas', MainCanvas)
-        // app.component('CanvasText', CanvasText)
         // register directives
         app.directive('canvas', directive)
 
@@ -39,5 +38,8 @@ export const canvasEverything: Plugin = {
             // in this case, user is responsible for creating MainCanvas
         }
 
+        // provide info
+        app.provide('canvasNodes', canvasNodes)
+        app.provide('refreshCanvasEverything', refreshCanvasEverything)
     }
 }

@@ -58,6 +58,13 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted, inject } from 'vue'
+
+// refresh on mounted (not needed - just a demo of `refresh` injection)
+const refreshAll = inject<() => void>('refreshCanvasEverything')!
+onMounted(() => refreshAll())
+
+// custom update function
 const update: CanvasEverything.CustomUpdateFunction = (options, x, y) => {
     const { ctx, node } = options
     ctx.save()

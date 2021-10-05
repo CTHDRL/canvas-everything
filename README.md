@@ -101,11 +101,23 @@ const myCustomUpdate = (options, x, y) => {
         defaultUpdate,  // call this function to run the default content render
     } = options
 
+    // x and y are the top-left coordinates of where the DOM content would appear
+
     // (your update here)
 }
-    </script>
+</script>
 ```
 
-### Redrawing the canvas
+### Refreshing the canvas
 
-`TODO` Documentation for refreshCanvasEverything
+If you need to force the DOM elements to re-measure themselves, you can inject `refreshCanvasEverything`:
+
+```html
+<script setup>
+    import { inject, onMounted } from 'vue'
+
+    const refreshAll = inject<() => void>('refreshCanvasEverything')!
+    // now you can call refreshAll whenever you need to update positioning
+    onMounted(() => refreshAll())
+</script>
+```
