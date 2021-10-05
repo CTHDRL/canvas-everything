@@ -49,23 +49,25 @@ const handleHover = () => {
     })
 }
 
+/** Listen for selectionchange events and update selection property if it contains the node */
 const handleSelection = () => {
     document.addEventListener('selectionchange', (evt) => {
         const selection = window.getSelection()
-        const anchor = selection?.anchorNode?.parentElement?.getAttribute(
-            'data-canvas-everything-uuid'
-        )
-        const focus = selection?.focusNode?.parentElement?.getAttribute(
-            'data-canvas-everything-uuid'
-        )
-        const found = canvasNodes.find(
-            (n) => n.uuid === anchor || n.uuid === focus
-        )
+        // const anchor = selection?.anchorNode?.parentElement?.getAttribute(
+        //     'data-canvas-everything-uuid'
+        // )
+        // const focus = selection?.focusNode?.parentElement?.getAttribute(
+        //     'data-canvas-everything-uuid'
+        // )
+        // const foundNodes = canvasNodes.filter(
+        //     (n) => n.uuid === anchor || n.uuid === focus
+        // )
 
-        if (selection && found) {
-            found.selection = selection
+        if (selection) {
             canvasNodes.forEach((node) => {
-                if (node !== found) {
+                if (selection.containsNode(node.element, true)) {
+                    node.selection = selection
+                } else {
                     node.selection = undefined
                 }
             })

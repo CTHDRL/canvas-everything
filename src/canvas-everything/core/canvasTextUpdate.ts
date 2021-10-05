@@ -36,23 +36,37 @@ export const canvasTextUpdate = (
 
     // draw selection
     if (item.selection && item.selection.type === 'Range') {
-        const { anchorOffset, focusOffset } = item.selection
-        const selectedText = element.innerText.slice(anchorOffset, focusOffset)
-        const leadingText = element.innerText.slice(0, anchorOffset)
-        const { width: selectionWidth } = ctx.measureText(selectedText)
-        const { width: leadingWidth } = ctx.measureText(leadingText)
+        const anchorEl = item.selection?.anchorNode?.parentElement
+        const focusEl = item.selection?.focusNode?.parentElement
         const { color, backgroundColor } = window.getComputedStyle(
             document.body,
             '::selection'
         )
 
+        // let selectionWidth = width
+        // let leadingWidth = 0
+        // let trailingWidth = 0
+        // if (anchorEl === item.element) {
+        //     const { anchorOffset, focusOffset } = item.selection
+        //     const selectedText = element.innerText.slice(
+        //         anchorOffset,
+        //         item.element === focusEl ? focusOffset : element.innerText.length
+        //     )
+        //     const leadingText = element.innerText.slice(0, anchorOffset)
+        //     const { width: selectionWidth } = ctx.measureText(selectedText)
+        //     const { width: leadingWidth } = ctx.measureText(leadingText)
+        // } else if (focusEl === item.element) {
+        //     const { anchorOffset, focusOffset } = item.selection
+
+        // }
+
         ctx.save()
         ctx.globalCompositeOperation = 'source-over'
         ctx.fillStyle = '#0075ff'
-        ctx.fillRect(x + leadingWidth, y, x + selectionWidth, height)
-        ctx.fillStyle = 'white'
-        ctx.fillText(selectedText, x + leadingWidth, y)
+        // ctx.fillStyle = backgroundColor || '#0075ff'
+        ctx.fillRect(x, y, width, height)
         ctx.restore()
+        ctx.fillStyle = 'white'
     }
 
     // draw border
