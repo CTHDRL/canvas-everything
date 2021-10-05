@@ -9,8 +9,10 @@ import { getTextNodesIn } from './getTextNodesInElement'
 
 export const directive: ObjectDirective = {
     mounted(el: HTMLElement, binding) {
-        const options = (binding.value ?? {}) as CanvasEverything.DirectiveOptions
-        const modifiers = (binding.modifiers ?? {}) as CanvasEverything.DirectiveModifiers
+        const options = (binding.value ??
+            {}) as CanvasEverything.DirectiveOptions
+        const modifiers = (binding.modifiers ??
+            {}) as CanvasEverything.DirectiveModifiers
 
         // save uuid to el
         const uuid = options.uuid ?? createUuid()
@@ -27,14 +29,21 @@ export const directive: ObjectDirective = {
             const textNodes = getTextNodesIn(el)
             // replace each text node with text split into spans
             const container = document.createElement('div')
-            textNodes.forEach(node => {
-                const newContent = '<span data-canvas-everything-wrapper><span>' + (node.textContent ?? '').trim().replace(/\s+/g, '</span> <span>') + '</span></span>'
+            textNodes.forEach((node) => {
+                const newContent =
+                    '<span data-canvas-everything-wrapper><span>' +
+                    (node.textContent ?? '')
+                        .trim()
+                        .replace(/\s+/g, '</span> <span>') +
+                    '</span></span>'
                 container.innerHTML = newContent
                 node.parentElement?.replaceChild(container.firstChild!, node)
             })
 
             // add new elements
-            const toTrack = Array.from(el.querySelectorAll('*[data-canvas-everything-wrapper] > span'))
+            const toTrack = Array.from(
+                el.querySelectorAll('*[data-canvas-everything-wrapper] > span')
+            )
             if (toTrack.length) {
                 // if we have anything to track, do so here
                 toTrack.forEach((item, i) => {
@@ -49,7 +58,6 @@ export const directive: ObjectDirective = {
             }
         } else {
             addOrUpdate(el as HTMLElement, binding, uuid, options)
-
         }
     },
     unmounted(el: HTMLElement) {
@@ -57,23 +65,30 @@ export const directive: ObjectDirective = {
         const uuids = [el.getAttribute(canvasEverythingUuidAttribute)!]
 
         // add all children uuids
-        const wrappedChildren = el.querySelectorAll(`*[${canvasEverythingUuidAttribute}]`)
-        wrappedChildren.forEach(child => {
+        const wrappedChildren = el.querySelectorAll(
+            `*[${canvasEverythingUuidAttribute}]`
+        )
+        wrappedChildren.forEach((child) => {
             uuids.push(child.getAttribute(canvasEverythingUuidAttribute)!)
         })
 
         // remove all by uuids
         uuids.forEach(removeCanvasEverythingNode)
-    }
+    },
 }
 
-
-const addOrUpdate = (el: HTMLElement, binding: any, uuid: CanvasEverything.Uuid, options: CanvasEverything.DirectiveOptions) => {
+const addOrUpdate = (
+    el: HTMLElement,
+    binding: any,
+    uuid: CanvasEverything.Uuid,
+    options: CanvasEverything.DirectiveOptions
+) => {
     // create node
     addOrUpdateCanvasEverythingNode({
         element: el,
         focus: false,
         hover: false,
+        selection: undefined,
         isIntersecting: false,
         meta: binding.value?.meta,
         rect: el.getBoundingClientRect(),

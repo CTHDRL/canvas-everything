@@ -14,6 +14,8 @@ export const setupDom = () => {
     // update hover property for all nodes
     handleHover()
 
+    handleSelection()
+
     // setup intersection observer
     intersectionObserver = new IntersectionObserver(
         intersectionObserverCallback
@@ -32,18 +34,45 @@ const handleHover = () => {
     document.addEventListener('mousemove', (evt) => {
         const el = evt.target as HTMLElement
         const uuid = el.getAttribute('data-canvas-everything-uuid')
-
         const found = canvasNodes.find((n) => n.uuid === uuid)
+
         if (found) {
+            found.hover = true
             canvasNodes.forEach((node) => {
-                if (node === found) {
-                    node.hover = true
-                } else {
+                if (node !== found) {
                     node.hover = false
                 }
             })
         } else {
             canvasNodes.forEach((node) => (node.hover = false))
+        }
+    })
+}
+
+/** Listen for selectionchange events and update selection property if it contains the node */
+const handleSelection = () => {
+    document.addEventListener('selectionchange', (evt) => {
+        const selection = window.getSelection()
+        // const anchor = selection?.anchorNode?.parentElement?.getAttribute(
+        //     'data-canvas-everything-uuid'
+        // )
+        // const focus = selection?.focusNode?.parentElement?.getAttribute(
+        //     'data-canvas-everything-uuid'
+        // )
+        // const foundNodes = canvasNodes.filter(
+        //     (n) => n.uuid === anchor || n.uuid === focus
+        // )
+
+        if (selection) {
+            canvasNodes.forEach((node) => {
+                if (selection.containsNode(node.element, true)) {
+                    node.selection = selection
+                } else {
+                    node.selection = undefined
+                }
+            })
+        } else {
+            canvasNodes.forEach((node) => (node.selection = undefined))
         }
     })
 }

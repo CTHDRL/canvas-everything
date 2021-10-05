@@ -91,6 +91,10 @@ const count = ref(0)
 </script>
 
 <style lang="scss">
+/* ::selection {
+    background: green;
+    color: wheat;
+} */
 .canvas-everything-demo {
     font-family: sans-serif;
     text-align: center;

@@ -5,6 +5,7 @@ declare namespace CanvasEverything {
         element: HTMLElement
         focus: boolean
         hover: boolean
+        selection: Selection | undefined
         isIntersecting: boolean
         meta: { [key: string]: any }
         rect: DOMRect
@@ -44,11 +45,13 @@ declare namespace CanvasEverything {
 
     type Type = 'CanvasEverything'
 
-    type CustomUpdateFunction =
-        (opts: OverrideOptions, x: number, y: number) => void
+    type CustomUpdateFunction = (
+        opts: OverrideOptions,
+        x: number,
+        y: number
+    ) => void
 
-    type UpdateFunction =
-        (item: Node, x: number, y: number) => void
+    type UpdateFunction = (item: Node, x: number, y: number) => void
 
     type Uuid = string
 }

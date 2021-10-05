@@ -34,6 +34,36 @@ export const canvasTextUpdate = (
         ctx.restore()
     }
 
+    // draw selection
+    if (item.selection && item.selection.type === 'Range') {
+        // TODO handle cases where selection is only part of a word or element
+        // const anchorEl = item.selection?.anchorNode?.parentElement
+        // const focusEl = item.selection?.focusNode?.parentElement
+        // const { anchorOffset, focusOffset } = item.selection
+        let selectionColor = 'white'
+        let selectionBackground = '#0075ff'
+        const selectionStyles = window.getComputedStyle(
+            document.body,
+            '::selection'
+        )
+        if (!document.hasFocus()) {
+            selectionColor = 'black'
+            selectionBackground = '#c8c8c8'
+        }
+        // TODO assign colors of selection pseudo element if set
+        // if (document.querySelector('document.body::selection')) {
+        //     selectionColor = selectionStyles.color
+        //     selectionBackground = selectionStyles.backgroundColor
+        // }
+
+        ctx.save()
+        ctx.globalCompositeOperation = 'source-over'
+        ctx.fillStyle = selectionBackground
+        ctx.fillRect(x, y + paddingTop, width, height - paddingTop * 2)
+        ctx.restore()
+        ctx.fillStyle = selectionColor
+    }
+
     // draw border
     if (parseFloat(style.borderWidth) > 0) {
         ctx.save()
