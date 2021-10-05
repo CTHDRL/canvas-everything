@@ -57,7 +57,6 @@
     </main>
 </template>
 
-
 <style lang="scss">
 .canvas-everything-demo {
     font-family: sans-serif;

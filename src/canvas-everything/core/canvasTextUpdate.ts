@@ -23,6 +23,7 @@ export const canvasTextUpdate = (
     const height = rect.height * dpr
     const paddingLeft = parseFloat(style.paddingLeft) * dpr
     const paddingTop = parseFloat(style.paddingTop) * dpr
+    const yAdjusted = y + (height - paddingTop * 2 - fontSizeFloat) / 2
 
     // draw background
     if (style.backgroundColor) {
@@ -55,8 +56,11 @@ export const canvasTextUpdate = (
         ctx.lineWidth = thickness * dpr
         ctx.strokeStyle = style.textDecorationColor
         ctx.beginPath()
-        ctx.moveTo(x + paddingLeft, y + paddingTop + textHeight)
-        ctx.lineTo(x + paddingLeft + textWidth, y + paddingTop + textHeight)
+        ctx.moveTo(x + paddingLeft, yAdjusted + paddingTop + textHeight)
+        ctx.lineTo(
+            x + paddingLeft + textWidth,
+            yAdjusted + paddingTop + textHeight
+        )
         ctx.stroke()
         ctx.restore()
     }
@@ -71,7 +75,7 @@ export const canvasTextUpdate = (
                     defaultTextUpdate(
                         element.innerText,
                         x,
-                        y,
+                        yAdjusted,
                         paddingLeft,
                         paddingTop,
                         ctx
@@ -81,7 +85,14 @@ export const canvasTextUpdate = (
             y
         )
     } else {
-        defaultTextUpdate(element.innerText, x, y, paddingLeft, paddingTop, ctx)
+        defaultTextUpdate(
+            element.innerText,
+            x,
+            yAdjusted,
+            paddingLeft,
+            paddingTop,
+            ctx
+        )
     }
 }
 const defaultTextUpdate = (
