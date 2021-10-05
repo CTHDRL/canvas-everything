@@ -6,19 +6,19 @@ declare namespace CanvasEverything {
         focus: boolean
         hover: boolean
         selection: Selection | undefined
-        image?: ImageData
         isIntersecting: boolean
         meta: { [key: string]: any }
         rect: DOMRect
         refresh: () => void
         style: CSSStyleDeclaration
         type: Type
-        updateOverride?: UpdateOverride
+        update?: CustomUpdateFunction
         uuid: Uuid
         z: number
     }
 
     interface ImageNode extends Node {
+        image: ImageData
         imageLoaded: boolean
     }
 
@@ -32,9 +32,9 @@ declare namespace CanvasEverything {
     type DirectiveOptions = Partial<Node>
 
     interface OverrideOptions {
-        canvasText: Node
+        node: Node
         ctx: CanvasRenderingContext2D
-        defaultUpdate: UpdateFunction
+        defaultUpdate: () => void
     }
 
     interface PluginOptions {
@@ -45,7 +45,11 @@ declare namespace CanvasEverything {
 
     type Type = 'CanvasEverything'
 
-    type UpdateOverride = (opts: OverrideOptions, x: number, y: number) => void
+    type CustomUpdateFunction = (
+        opts: OverrideOptions,
+        x: number,
+        y: number
+    ) => void
 
     type UpdateFunction = (item: Node, x: number, y: number) => void
 

@@ -3,7 +3,6 @@ import { v4 as createUuid } from 'uuid'
 import {
     addOrUpdateCanvasEverythingNode,
     canvasEverythingUuidAttribute,
-    intersectionObserver,
     removeCanvasEverythingNode,
 } from '../core'
 import { getTextNodesIn } from './getTextNodesInElement'
@@ -99,7 +98,7 @@ const addOrUpdate = (
         },
         style: window.getComputedStyle(el),
         type: 'CanvasEverything',
-        updateOverride: undefined,
+        update: undefined,
         uuid,
         z: 0,
         ...options,
