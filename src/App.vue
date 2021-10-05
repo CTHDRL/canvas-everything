@@ -13,6 +13,7 @@
             igitur, cum de re conveniat, non malumus usitate loqui? Quae cum
             dixisset paulumque institisset, Quid est?
         </p>
+        <h2 v-canvas="{ update }">Customizable Update Functions</h2>
         <div class="image-sizer">
             <img src="//placekitten.com/250/250" v-canvas />
         </div>
@@ -56,6 +57,25 @@
         <h1 v-canvas.format-text>Title</h1>
     </main>
 </template>
+
+<script lang="ts" setup>
+import { onMounted, inject } from 'vue'
+
+// refresh on mounted (not needed - just a demo of `refresh` injection)
+const refreshAll = inject<() => void>('refreshCanvasEverything')!
+onMounted(() => refreshAll())
+
+// custom update function
+const update: CanvasEverything.CustomUpdateFunction = (options, x, y) => {
+    const { ctx, node } = options
+    ctx.save()
+    ctx.translate(window.innerWidth, y)
+    ctx.rotate(Math.sin(Date.now() * 0.001) * 0.1)
+    ctx.textAlign = 'center'
+    ctx.fillText(node.element.innerText, 0, 0)
+    ctx.restore()
+}
+</script>
 
 <style lang="scss">
 .canvas-everything-demo {

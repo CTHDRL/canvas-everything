@@ -6,7 +6,7 @@ export const canvasTextUpdate = (
     // ignore if offscreen
     if (!item.isIntersecting) return
 
-    const { element, rect, style, updateOverride } = item
+    const { element, rect, style, update: updateOverride } = item
     // update font style
     ctx.textBaseline = 'top'
     ctx.textAlign = 'left'
@@ -70,7 +70,7 @@ export const canvasTextUpdate = (
         updateOverride(
             {
                 ctx,
-                canvasText: item,
+                node: item,
                 defaultUpdate: () =>
                     defaultTextUpdate(
                         element.innerText,
