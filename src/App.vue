@@ -58,13 +58,13 @@
 </template>
 
 <script lang="ts" setup>
-const update: CanvasEverything.CustomUpdateFunction = (node, x, y) => {
-    const { ctx } = node
+const update: CanvasEverything.CustomUpdateFunction = (options, x, y) => {
+    const { ctx, node } = options
     ctx.save()
     ctx.translate(window.innerWidth, y)
     ctx.rotate(Math.sin(Date.now() * 0.001) * 0.1)
     ctx.textAlign = 'center'
-    ctx.fillText(node.canvasText.element.innerText, 0, 0)
+    ctx.fillText(node.element.innerText, 0, 0)
     ctx.restore()
 }
 </script>

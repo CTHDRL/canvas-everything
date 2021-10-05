@@ -37,7 +37,7 @@ export const canvasTextUpdate = (
         updateOverride(
             {
                 ctx,
-                canvasText: item,
+                node: item,
                 defaultUpdate: () =>
                     defaultTextUpdate(
                         element.innerText,

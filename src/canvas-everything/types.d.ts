@@ -31,7 +31,7 @@ declare namespace CanvasEverything {
     type DirectiveOptions = Partial<Node>
 
     interface OverrideOptions {
-        canvasText: Node
+        node: Node
         ctx: CanvasRenderingContext2D
         defaultUpdate: () => void
     }

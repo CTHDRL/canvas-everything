@@ -60,6 +60,8 @@ This will create more accurate text rendering at the cost of some extra DOM mani
 A full list of available directive options with their defaults:
 
 ```js
+// Usage:
+// <div v-canvas="{ /* any options from below */ }">...</div>
 {
     meta, // Object - default {} arbitrary key-value data
     update, // Function - see Using Custom Update Functions below
@@ -82,7 +84,27 @@ A full list of available directive options with their defaults:
 
 ### Using Custom Update Functions
 
-`TODO` Documentation for using updateOverride
+You can add your own custom rendering function as an option:
+
+```html
+<template>
+    <h1 v-canvas="{ update: myCustomUpdate }">Custom Update</h1>
+</template>
+
+<script setup>
+// update functions are of type CanvasEverything.CustomUpdateFunction
+const myCustomUpdate = (options, x, y) => {
+    // options is an object of type CanvasEverything.OverrideOptions 
+    const {
+        node,   // object with same properties as the Options list above
+        ctx,    // CanvasRenderingContext2D where content will be drawn
+        defaultUpdate,  // call this function to run the default content render
+    } = options
+
+    // (your update here)
+}
+    </script>
+```
 
 ### Redrawing the canvas
 
