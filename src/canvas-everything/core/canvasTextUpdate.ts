@@ -37,9 +37,9 @@ export const canvasTextUpdate = (
     // draw selection
     if (item.selection && item.selection.type === 'Range') {
         // TODO handle cases where selection is only part of a word or element
-        const anchorEl = item.selection?.anchorNode?.parentElement
-        const focusEl = item.selection?.focusNode?.parentElement
-        const { anchorOffset, focusOffset } = item.selection
+        // const anchorEl = item.selection?.anchorNode?.parentElement
+        // const focusEl = item.selection?.focusNode?.parentElement
+        // const { anchorOffset, focusOffset } = item.selection
         let selectionColor = 'white'
         let selectionBackground = '#0075ff'
         const selectionStyles = window.getComputedStyle(
@@ -55,10 +55,6 @@ export const canvasTextUpdate = (
         //     selectionColor = selectionStyles.color
         //     selectionBackground = selectionStyles.backgroundColor
         // }
-
-        let selectionWidth = width
-        let leadingWidth = 0
-        let trailingWidth = 0
 
         ctx.save()
         ctx.globalCompositeOperation = 'source-over'
