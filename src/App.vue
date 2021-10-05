@@ -1,6 +1,7 @@
 <template>
     <main class="canvas-everything-demo">
         <h1>Title</h1>
+        <button v-canvas>button</button>
         <p>
             <span class="p1" v-canvas>nonne inventa sunt?</span> Quis est, qui
             non oderit libidinosam, protervam adolescentiam? Verum tamen cum de
@@ -83,6 +84,7 @@ const update: CanvasEverything.CustomUpdateFunction = (options, x, y) => {
 
     h2 {
         font-weight: 400;
+        text-decoration: underline;
     }
     p {
         max-width: 400px;
@@ -103,10 +105,12 @@ const update: CanvasEverything.CustomUpdateFunction = (options, x, y) => {
         display: inline-block;
         transition: all 300ms ease;
         padding: 50px 30px;
+        border: 5px solid green;
 
         &:hover {
             color: #909280;
             background: #155568;
+            border-color: red;
         }
     }
 }
