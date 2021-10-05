@@ -11,8 +11,9 @@ export const canvasTextUpdate = (
     ctx.textBaseline = 'top'
     ctx.textAlign = 'left'
     const fontSizeFloat = parseFloat(style.fontSize)
-    ctx.font = `${style.fontWeight} ${fontSizeFloat * dpr}px ${style.fontFamily
-        }`
+    ctx.font = `${style.fontWeight} ${fontSizeFloat * dpr}px ${
+        style.fontFamily
+    }`
     ctx.fillStyle = style.color
 
     // calc position
@@ -32,6 +33,34 @@ export const canvasTextUpdate = (
         ctx.restore()
     }
 
+    // draw border
+    if (parseFloat(style.borderWidth) > 0) {
+        ctx.save()
+        const borderWidth = parseFloat(style.borderWidth)
+        ctx.strokeStyle = style.borderColor
+        ctx.lineWidth = borderWidth
+        ctx.strokeRect(x, y, width, height)
+        ctx.restore()
+    }
+
+    // draw underline
+    if (style.textDecoration.includes('underline')) {
+        ctx.save()
+        const thickness =
+            style.textDecorationThickness === 'auto'
+                ? 2
+                : parseFloat(style.textDecorationThickness)
+        const { width: textWidth, fontBoundingBoxDescent: textHeight } =
+            ctx.measureText(element.innerText)
+        ctx.lineWidth = thickness * dpr
+        ctx.strokeStyle = style.textDecorationColor
+        ctx.beginPath()
+        ctx.moveTo(x + paddingLeft, y + paddingTop + textHeight)
+        ctx.lineTo(x + paddingLeft + textWidth, y + paddingTop + textHeight)
+        ctx.stroke()
+        ctx.restore()
+    }
+
     // draw text
     if (updateOverride) {
         updateOverride(
@@ -45,7 +74,7 @@ export const canvasTextUpdate = (
                         y,
                         paddingLeft,
                         paddingTop,
-                        ctx,
+                        ctx
                     ),
             },
             x,
