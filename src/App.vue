@@ -16,7 +16,7 @@
             <img src="//placekitten.com/250/250" v-canvas />
         </div>
         <h2>Another Title</h2>
-        <div v-canvas.wrap-text>
+        <div v-canvas.format-text>
             Text
             <p class="test">
                 <strong>Lorem ipsum dolor sit amet,</strong> consectetur
@@ -39,7 +39,7 @@
         </div>
 
         <h2 class="color-title" v-canvas>Color Title</h2>
-        <p v-canvas.wrap-text>
+        <p v-canvas.format-text>
             <strong>Lorem ipsum dolor sit amet,</strong> consectetur adipiscing
             elit. Ea, quae dialectici nunc tradunt et docent, nonne ab illis
             instituta sunt aut inventa sunt? Quis est, qui non oderit
@@ -52,7 +52,7 @@
             conveniat, non malumus usitate loqui? Quae cum dixisset paulumque
             institisset, Quid est?
         </p>
-        <h1 v-canvas.wrap-text>Title</h1>
+        <h1 v-canvas.format-text>Title</h1>
     </main>
 </template>
 

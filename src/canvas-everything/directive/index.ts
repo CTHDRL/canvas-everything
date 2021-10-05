@@ -21,7 +21,7 @@ export const directive: ObjectDirective = {
         el.style.opacity = '0'
 
         // should we wrap contens in spans?
-        const wrapText = modifiers.wrapText || modifiers['wrap-text']
+        const wrapText = modifiers.formatText || modifiers['format-text']
 
         if (wrapText) {
             // find all text nodes
@@ -54,11 +54,17 @@ export const directive: ObjectDirective = {
         }
     },
     unmounted(el: HTMLElement) {
-        const uuid = el.getAttribute(canvasEverythingUuidAttribute)
-        if (uuid) {
-            removeCanvasEverythingNode(uuid)
-            intersectionObserver.unobserve(el)
-        }
+        // start with el to remove
+        const uuids = [el.getAttribute(canvasEverythingUuidAttribute)!]
+
+        // add all children uuids
+        const wrappedChildren = el.querySelectorAll(`*[${canvasEverythingUuidAttribute}]`)
+        wrappedChildren.forEach(child => {
+            uuids.push(child.getAttribute(canvasEverythingUuidAttribute)!)
+        })
+
+        // remove all by uuids
+        uuids.forEach(removeCanvasEverythingNode)
     }
 }
 

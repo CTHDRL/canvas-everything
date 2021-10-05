@@ -24,8 +24,8 @@ declare namespace CanvasEverything {
     // OTHER TYPES
     // ====================
     type DirectiveModifiers = {
-        wrapText?: boolean
-        'wrap-text'?: boolean
+        formatText?: boolean
+        'format-text'?: boolean
     }
 
     type DirectiveOptions = Partial<Node>
