@@ -11,7 +11,7 @@ declare namespace CanvasEverything {
         refresh: () => void
         style: CSSStyleDeclaration
         type: Type
-        updateOverride?: UpdateOverride
+        update?: CustomUpdateFunction
         uuid: Uuid
         z: number
     }
@@ -33,7 +33,7 @@ declare namespace CanvasEverything {
     interface OverrideOptions {
         canvasText: Node
         ctx: CanvasRenderingContext2D
-        defaultUpdate: UpdateFunction
+        defaultUpdate: () => void
     }
 
     interface PluginOptions {
@@ -44,7 +44,7 @@ declare namespace CanvasEverything {
 
     type Type = 'CanvasEverything'
 
-    type UpdateOverride =
+    type CustomUpdateFunction =
         (opts: OverrideOptions, x: number, y: number) => void
 
     type UpdateFunction =

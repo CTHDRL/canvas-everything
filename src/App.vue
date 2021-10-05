@@ -12,6 +12,7 @@
             igitur, cum de re conveniat, non malumus usitate loqui? Quae cum
             dixisset paulumque institisset, Quid est?
         </p>
+        <h2 v-canvas="{ update }">Customizable Update Functions</h2>
         <div class="image-sizer">
             <img src="//placekitten.com/250/250" v-canvas />
         </div>
@@ -56,6 +57,17 @@
     </main>
 </template>
 
+<script lang="ts" setup>
+const update: CanvasEverything.CustomUpdateFunction = (node, x, y) => {
+    const { ctx } = node
+    ctx.save()
+    ctx.translate(window.innerWidth, y)
+    ctx.rotate(Math.sin(Date.now() * 0.001) * 0.1)
+    ctx.textAlign = 'center'
+    ctx.fillText(node.canvasText.element.innerText, 0, 0)
+    ctx.restore()
+}
+</script>
 
 <style lang="scss">
 .canvas-everything-demo {

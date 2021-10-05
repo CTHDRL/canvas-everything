@@ -62,7 +62,7 @@ A full list of available directive options with their defaults:
 ```js
 {
     meta, // Object - default {} arbitrary key-value data
-    updateOverride, // Function - see below
+    update, // Function - see Using Custom Update Functions below
     z, // Number - default 0 - what z-index this should be drawn on on the canvas
 
     // Available but usually handled internally:
