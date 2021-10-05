@@ -1,7 +1,9 @@
 <template>
     <main class="canvas-everything-demo">
         <h1>Title</h1>
-        <button v-canvas>button</button>
+        <button v-canvas @click="count++">button</button>
+        <p v-canvas>Count: {{ count }}</p>
+
         <p>
             <span class="p1" v-canvas>nonne inventa sunt?</span> Quis est, qui
             non oderit libidinosam, protervam adolescentiam? Verum tamen cum de
@@ -13,7 +15,9 @@
             igitur, cum de re conveniat, non malumus usitate loqui? Quae cum
             dixisset paulumque institisset, Quid est?
         </p>
-        <h2 v-canvas="{ update }">Customizable Update Functions</h2>
+        <h2 class="no-underline" v-canvas="{ update }">
+            Customizable Update Functions
+        </h2>
         <div class="image-sizer">
             <img src="//placekitten.com/250/250" v-canvas />
         </div>
@@ -55,11 +59,17 @@
             institisset, Quid est?
         </p>
         <h1 v-canvas.format-text>Title</h1>
+        <button v-canvas @click="count++">button</button>
+
+        <p v-canvas.format-text :key="count">
+            Dynamic text flickers with <br /><code>format-text</code>:<br />
+            {{ count }}
+        </p>
     </main>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, inject } from 'vue'
+import { onMounted, inject, ref } from 'vue'
 
 // refresh on mounted (not needed - just a demo of `refresh` injection)
 const refreshAll = inject<() => void>('refreshCanvasEverything')!
@@ -75,6 +85,9 @@ const update: CanvasEverything.CustomUpdateFunction = (options, x, y) => {
     ctx.fillText(node.element.innerText, 0, 0)
     ctx.restore()
 }
+
+// for dynamic content
+const count = ref(0)
 </script>
 
 <style lang="scss">
@@ -84,7 +97,10 @@ const update: CanvasEverything.CustomUpdateFunction = (options, x, y) => {
 
     h2 {
         font-weight: 400;
-        text-decoration: underline;
+
+        &:not(.no-underline) {
+            text-decoration: underline;
+        }
     }
     p {
         max-width: 400px;

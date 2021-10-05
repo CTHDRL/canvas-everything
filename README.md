@@ -55,7 +55,7 @@ By default, `v-canvas` doesn't handle text wrapping or some other CSS properties
 <p v-canvas.format-text>Lorem ipsum dolor...</p>
 ```
 
-This will create more accurate text rendering at the cost of some extra DOM manipulation.
+This will create more accurate text rendering at the cost of some extra DOM manipulation. **Note that `.format-text` also prevents dynamic text from updating after its first render** - you can either rerender by changing its `key` or keep `.format-text` on unchanging content.
 
 A full list of available directive options with their defaults:
 
