@@ -40,6 +40,10 @@ export const canvasTextUpdate = (
         const leadingText = element.innerText.slice(0, anchorOffset)
         const { width: selectionWidth } = ctx.measureText(selectedText)
         const { width: leadingWidth } = ctx.measureText(leadingText)
+        const { color, backgroundColor } = window.getComputedStyle(
+            document.body,
+            '::selection'
+        )
 
         ctx.save()
         ctx.globalCompositeOperation = 'source-over'

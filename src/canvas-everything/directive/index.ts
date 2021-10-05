@@ -9,7 +9,8 @@ import {
 
 export const directive: ObjectDirective = {
     mounted(el: HTMLElement, binding) {
-        const options = (binding.value ?? {}) as CanvasEverything.DirectiveOptions
+        const options = (binding.value ??
+            {}) as CanvasEverything.DirectiveOptions
 
         // save uuid to el
         const uuid = options.uuid ?? createUuid()
@@ -37,7 +38,6 @@ export const directive: ObjectDirective = {
 
         // hide original el
         el.style.opacity = '0'
-
     },
     unmounted(el: HTMLElement) {
         const uuid = el.getAttribute(canvasEverythingUuidAttribute)
@@ -45,5 +45,5 @@ export const directive: ObjectDirective = {
             removeCanvasEverythingNode(uuid)
             intersectionObserver.unobserve(el)
         }
-    }
+    },
 }
