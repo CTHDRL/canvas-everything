@@ -36,37 +36,36 @@ export const canvasTextUpdate = (
 
     // draw selection
     if (item.selection && item.selection.type === 'Range') {
+        // TODO handle cases where selection is only part of a word or element
         const anchorEl = item.selection?.anchorNode?.parentElement
         const focusEl = item.selection?.focusNode?.parentElement
-        const { color, backgroundColor } = window.getComputedStyle(
+        const { anchorOffset, focusOffset } = item.selection
+        let selectionColor = 'white'
+        let selectionBackground = '#0075ff'
+        const selectionStyles = window.getComputedStyle(
             document.body,
             '::selection'
         )
-
-        // let selectionWidth = width
-        // let leadingWidth = 0
-        // let trailingWidth = 0
-        // if (anchorEl === item.element) {
-        //     const { anchorOffset, focusOffset } = item.selection
-        //     const selectedText = element.innerText.slice(
-        //         anchorOffset,
-        //         item.element === focusEl ? focusOffset : element.innerText.length
-        //     )
-        //     const leadingText = element.innerText.slice(0, anchorOffset)
-        //     const { width: selectionWidth } = ctx.measureText(selectedText)
-        //     const { width: leadingWidth } = ctx.measureText(leadingText)
-        // } else if (focusEl === item.element) {
-        //     const { anchorOffset, focusOffset } = item.selection
-
+        if (!document.hasFocus()) {
+            selectionColor = 'black'
+            selectionBackground = '#c8c8c8'
+        }
+        // TODO assign colors of selection pseudo element if set
+        // if (document.querySelector('document.body::selection')) {
+        //     selectionColor = selectionStyles.color
+        //     selectionBackground = selectionStyles.backgroundColor
         // }
+
+        let selectionWidth = width
+        let leadingWidth = 0
+        let trailingWidth = 0
 
         ctx.save()
         ctx.globalCompositeOperation = 'source-over'
-        ctx.fillStyle = '#0075ff'
-        // ctx.fillStyle = backgroundColor || '#0075ff'
-        ctx.fillRect(x, y, width, height)
+        ctx.fillStyle = selectionBackground
+        ctx.fillRect(x, y + paddingTop, width, height - paddingTop * 2)
         ctx.restore()
-        ctx.fillStyle = 'white'
+        ctx.fillStyle = selectionColor
     }
 
     // draw border
