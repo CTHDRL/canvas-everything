@@ -1,4 +1,6 @@
 declare namespace CanvasEverything {
+    // NODES
+    // ====================
     interface Node {
         element: HTMLElement
         focus: boolean
@@ -17,6 +19,13 @@ declare namespace CanvasEverything {
 
     interface ImageNode extends Node {
         imageLoaded: boolean
+    }
+
+    // OTHER TYPES
+    // ====================
+    type DirectiveModifiers = {
+        wrapText?: boolean
+        'wrap-text'?: boolean
     }
 
     type DirectiveOptions = Partial<Node>

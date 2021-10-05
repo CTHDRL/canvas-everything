@@ -11,6 +11,7 @@ import { getTextNodesIn } from './getTextNodesInElement'
 export const directive: ObjectDirective = {
     mounted(el: HTMLElement, binding) {
         const options = (binding.value ?? {}) as CanvasEverything.DirectiveOptions
+        const modifiers = (binding.modifiers ?? {}) as CanvasEverything.DirectiveModifiers
 
         // save uuid to el
         const uuid = options.uuid ?? createUuid()
@@ -19,28 +20,37 @@ export const directive: ObjectDirective = {
         // hide original el
         el.style.opacity = '0'
 
-        // find all text nodes
-        const textNodes = getTextNodesIn(el)
-        // replace each text node with text split into spans
-        const container = document.createElement('div')
-        textNodes.forEach(node => {
-            const newContent = '<span data-canvas-everything-wrapper><span>' + (node.textContent ?? '').trim().replace(/\s+/g, '</span> <span>') + '</span></span>'
-            container.innerHTML = newContent
-            node.parentElement?.replaceChild(container.firstChild!, node)
-        })
+        // should we wrap contens in spans?
+        const wrapText = modifiers.wrapText || modifiers['wrap-text']
 
-        // add new elements
-        const toTrack = Array.from(el.querySelectorAll('*[data-canvas-everything-wrapper] > span'))
-        if (toTrack.length) {
-            toTrack.forEach((item, i) => {
-                const itemUuid = `${uuid}.${i}`
-                item.setAttribute(canvasEverythingUuidAttribute, itemUuid)
-
-                addOrUpdate(item as HTMLElement, binding, itemUuid, options)
+        if (wrapText) {
+            // find all text nodes
+            const textNodes = getTextNodesIn(el)
+            // replace each text node with text split into spans
+            const container = document.createElement('div')
+            textNodes.forEach(node => {
+                const newContent = '<span data-canvas-everything-wrapper><span>' + (node.textContent ?? '').trim().replace(/\s+/g, '</span> <span>') + '</span></span>'
+                container.innerHTML = newContent
+                node.parentElement?.replaceChild(container.firstChild!, node)
             })
+
+            // add new elements
+            const toTrack = Array.from(el.querySelectorAll('*[data-canvas-everything-wrapper] > span'))
+            if (toTrack.length) {
+                // if we have anything to track, do so here
+                toTrack.forEach((item, i) => {
+                    const itemUuid = `${uuid}.${i}`
+                    item.setAttribute(canvasEverythingUuidAttribute, itemUuid)
+
+                    addOrUpdate(item as HTMLElement, binding, itemUuid, options)
+                })
+            } else {
+                // otherwise, just use the regular element
+                addOrUpdate(el as HTMLElement, binding, uuid, options)
+            }
         } else {
-            // const target = toTrack.lengt
             addOrUpdate(el as HTMLElement, binding, uuid, options)
+
         }
     },
     unmounted(el: HTMLElement) {

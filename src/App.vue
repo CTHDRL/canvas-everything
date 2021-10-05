@@ -1,7 +1,7 @@
 <template>
     <main class="canvas-everything-demo">
-        <!-- <h1>Title</h1> -->
-        <!-- <p>
+        <h1>Title</h1>
+        <p>
             <span class="p1" v-canvas>nonne inventa sunt?</span> Quis est, qui
             non oderit libidinosam, protervam adolescentiam? Verum tamen cum de
             rebus grandioribus dicas, ipsae res verba rapiunt; Quibusnam
@@ -11,12 +11,12 @@
             Illud dico, ea, quae dicat, praeclare inter se cohaerere. Cur
             igitur, cum de re conveniat, non malumus usitate loqui? Quae cum
             dixisset paulumque institisset, Quid est?
-        </p> -->
+        </p>
         <div class="image-sizer">
             <img src="//placekitten.com/250/250" v-canvas />
         </div>
-        <!-- <h2>Another Title</h2> -->
-        <div v-canvas>
+        <h2>Another Title</h2>
+        <div v-canvas.wrap-text>
             Text
             <p class="test">
                 <strong>Lorem ipsum dolor sit amet,</strong> consectetur
@@ -39,7 +39,7 @@
         </div>
 
         <h2 class="color-title" v-canvas>Color Title</h2>
-        <p v-canvas>
+        <p v-canvas.wrap-text>
             <strong>Lorem ipsum dolor sit amet,</strong> consectetur adipiscing
             elit. Ea, quae dialectici nunc tradunt et docent, nonne ab illis
             instituta sunt aut inventa sunt? Quis est, qui non oderit
@@ -52,7 +52,7 @@
             conveniat, non malumus usitate loqui? Quae cum dixisset paulumque
             institisset, Quid est?
         </p>
-        <h1 v-canvas>Title</h1>
+        <h1 v-canvas.wrap-text>Title</h1>
     </main>
 </template>
 
