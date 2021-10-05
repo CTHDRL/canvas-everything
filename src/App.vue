@@ -55,6 +55,7 @@
 
     h2 {
         font-weight: 400;
+        text-decoration: underline;
     }
     p {
         max-width: 400px;
@@ -79,6 +80,7 @@
         &:hover {
             color: #909280;
             background: #155568;
+            border-color: red;
         }
     }
 }
