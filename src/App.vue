@@ -1,6 +1,7 @@
 <template>
     <main class="canvas-everything-demo">
         <h1>Title</h1>
+        <button v-canvas>button</button>
         <p>
             <span class="p1" v-canvas>nonne inventa sunt?</span> Quis est, qui
             non oderit libidinosam, protervam adolescentiam? Verum tamen cum de
@@ -73,6 +74,7 @@
         display: inline-block;
         transition: all 300ms ease;
         padding: 50px 30px;
+        border: 5px solid green;
 
         &:hover {
             color: #909280;
