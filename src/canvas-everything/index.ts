@@ -1,4 +1,4 @@
-import { createApp, Plugin } from 'vue'
+import { createApp, inject, Plugin } from 'vue'
 import { setupDom } from './core'
 import { canvasNodes, refreshCanvasEverything } from './core'
 
@@ -7,6 +7,10 @@ import MainCanvas from './components/MainCanvas.vue'
 // import directives
 import { directive } from './directive'
 
+const canvasNodesKey = 'canvasNodes'
+const refreshKey = 'refreshCanvasEverything'
+
+// main plugin
 export const canvasEverything: Plugin = {
     install(app, options: CanvasEverything.PluginOptions = {}) {
         // setup dom
@@ -22,9 +26,10 @@ export const canvasEverything: Plugin = {
             // TODO: allow passing custom canvas?
         } else if (!options.preventCanvasAutoCreate) {
             // create and mount MainCanvas
-            let container = typeof options.mountPoint === 'string'
-                ? document.querySelector(options.mountPoint)
-                : options.mountPoint
+            let container =
+                typeof options.mountPoint === 'string'
+                    ? document.querySelector(options.mountPoint)
+                    : options.mountPoint
 
             // create our own mount point for the canvas
             if (!container) {
@@ -39,7 +44,17 @@ export const canvasEverything: Plugin = {
         }
 
         // provide info
-        app.provide('canvasNodes', canvasNodes)
-        app.provide('refreshCanvasEverything', refreshCanvasEverything)
-    }
+        app.provide(canvasNodesKey, canvasNodes)
+        app.provide(refreshKey, refreshCanvasEverything)
+    },
+}
+
+/** Refresh composable */
+export const useRefresh = () => {
+    return inject<() => void>(refreshKey)!
+}
+
+/** Canvas nodes */
+export const useCanvasNodes = () => {
+    return inject<CanvasEverything.Node[]>(canvasNodesKey)!
 }

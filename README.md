@@ -4,7 +4,7 @@ A Vue 3 plugin for drawing the DOM to canvas.
 
 ## Works with...
 
-DOM elements: 
+DOM elements:
 
 -   [x] All text elements
 -   [x] Images
@@ -68,7 +68,7 @@ A full list of available directive options with their defaults:
     z, // Number - default 0 - what z-index this should be drawn on on the canvas
 
     // Available but usually handled internally:
-    element, // HTMLElement - default: the attached element. Usually left alone. 
+    element, // HTMLElement - default: the attached element. Usually left alone.
     focus, // boolean - default whether the element is focused
     hover, // boolean - default whether the element is hovered
     image, // ImageData - only used if on an <img>
@@ -92,32 +92,33 @@ You can add your own custom rendering function as an option:
 </template>
 
 <script setup>
-// update functions are of type CanvasEverything.CustomUpdateFunction
-const myCustomUpdate = (options, x, y) => {
-    // options is an object of type CanvasEverything.OverrideOptions 
-    const {
-        node,   // object with same properties as the Options list above
-        ctx,    // CanvasRenderingContext2D where content will be drawn
-        defaultUpdate,  // call this function to run the default content render
-    } = options
+    // update functions are of type CanvasEverything.CustomUpdateFunction
+    const myCustomUpdate = (options, x, y) => {
+        // options is an object of type CanvasEverything.OverrideOptions
+        const {
+            node, // object with same properties as the Options list above
+            ctx, // CanvasRenderingContext2D where content will be drawn
+            defaultUpdate, // call this function to run the default content render
+        } = options
 
-    // x and y are the top-left coordinates of where the DOM content would appear
+        // x and y are the top-left coordinates of where the DOM content would appear
 
-    // (your update here)
-}
+        // (your update here)
+    }
 </script>
 ```
 
 ### Refreshing the canvas
 
-If you need to force the DOM elements to re-measure themselves, you can inject `refreshCanvasEverything`:
+If you need to force the DOM elements to re-measure themselves, you can use the `useRefresh` composable:
 
 ```html
 <script setup>
-    import { inject, onMounted } from 'vue'
+    import { useRefresh } from 'canvas-everything'
 
-    const refreshAll = inject<() => void>('refreshCanvasEverything')!
-    // now you can call refreshAll whenever you need to update positioning
-    onMounted(() => refreshAll())
+    const refresh = useRefresh()
+
+    // now you can call refresh whenever you need to update positioning
+    onMounted(() => refresh())
 </script>
 ```
