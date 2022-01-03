@@ -1,6 +1,6 @@
 # Canvas Everything
 
-A Vue 3 plugin for drawing the DOM to canvas.
+A Vue 3 plugin for drawing the DOM to canvas. **Note:** This package is usable but not complete. You may want to try [CurtainsJS](https://www.curtainsjs.com/) for a more full-featured plugin with a similar effect.
 
 ## Works with...
 
